@@ -8,7 +8,7 @@ function FormCreator({errors, touched}) {
   return (
     <Form>
       <div>
-        {touched.name && errors.name && <p>errors.name</p>}
+        {touched.name && errors.name && <p>{errors.name}</p>}
         <Field type="text" name="name" placeholder="Name" />
       </div>
       <div>
