@@ -3,7 +3,7 @@ import { withFormik, Form, Field } from "formik";
 import * as Yup from 'yup';
 
 
-function FormCreator({errors, touched}) {
+function FormCreator({errors, touched, values}) {
 
   return (
     <Form>
@@ -19,17 +19,24 @@ function FormCreator({errors, touched}) {
         {touched.password && errors.password && <p>{errors.password}</p>}
         <Field type="password" name="password" placeholder="Password" />
       </div>
+      <div>
+        <label>
+          <Field type="checkbox" name="tos" checked={values.tos} />
+          Terms of Service
+        </label>
+      </div>
       <button>Submit</button>
     </Form>
   )
 }
 
 const FormikOnboardForm = withFormik({
-  mapPropsToValues({name, username, password}) {
+  mapPropsToValues({name, username, password, tos}) {
     return {
       name: name || '',
       username: username || '',
-      password: password || ''
+      password: password || '',
+      tos: tos || false
     };
   },
   //======Validation Schema=======
