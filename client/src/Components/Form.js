@@ -1,6 +1,7 @@
 import React from 'react';
 import { withFormik, Form, Field } from "formik";
 import * as Yup from 'yup';
+import axios from 'axios';
 
 
 function FormCreator({errors, touched, values}) {
@@ -25,16 +26,16 @@ function FormCreator({errors, touched, values}) {
           Terms of Service
         </label>
       </div>
-      <button>Submit</button>
+      <button type="submit">Submit</button>
     </Form>
   )
 }
 
 const FormikOnboardForm = withFormik({
-  mapPropsToValues({name, username, password, tos}) {
+  mapPropsToValues({name, email, password, tos}) {
     return {
       name: name || '',
-      username: username || '',
+      email: email || '',
       password: password || '',
       tos: tos || false
     };
@@ -51,7 +52,10 @@ const FormikOnboardForm = withFormik({
       .required()
   }),
   handleSubmit(values) {
-    console.log(values);
+    axios.post('https://reqres.in/api/users', values)
+      .then(response => {
+        console.log(response);
+      })
   }
 })(FormCreator);
 
