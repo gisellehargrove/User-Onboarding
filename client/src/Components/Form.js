@@ -9,9 +9,8 @@ function FormCreator({errors, touched, values, status}) {
 
   useEffect(() => {
     if(status) setUsers([...users, status])
-  }, [status])
+  }, [status]);
 
-  console.log(users, 'formcreator users')
   return (
     <div>
       <Form>
@@ -67,10 +66,8 @@ const FormikOnboardForm = withFormik({
       .required()
   }),
   handleSubmit(values, { resetForm, setStatus }) {
-    console.log(values)
     axios.post('https://reqres.in/api/users', values)
       .then(response => {
-        console.log(response);
         setStatus(response.data);
         resetForm();
       }).catch(err => {
